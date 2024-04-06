@@ -93,6 +93,10 @@ bound() {
     ip -4 addr add $ip/$mask ${broadcast:+broadcast $broadcast} dev $interface
     ip -4 link set dev $interface up
     routes
+
+    for i in $dns; do
+            echo "nameserver $i"
+    done;;
 }
 
 renew() {
@@ -108,6 +112,10 @@ renew() {
             break
         fi
     done
+
+    for i in $dns; do
+        echo "nameserver $i"
+    done;;
 }
 
 case "$1" in
